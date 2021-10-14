@@ -16,6 +16,7 @@
         <div class="loginHeader">登录 </div>
         <div class="loginForm">
             <div class="loginFormInner">
+                <!-- 密码登录 -->
                 <div class="" data-login-sdk="baseLogin">
                     <div class="loginTab">
                         <a href="javascript:;" class="selected">密码登录</a>
@@ -29,11 +30,16 @@
                         <div class="loginInfoItem">
                             <div class="loginAccount"><input data-baselogin="pwdInput" class="inputBox" type="password" placeholder="请输入密码" maxlength="11"></div>
                         </div>
+                        <div class="loginInfoOthers">
+                            <div class="register"><a data-baselogin="reg">激活账号</a></div>
+                            <div class="forgotPwd"><a data-baselogin="forgotPwd">忘记密码</a></div>
+                        </div>
                     </div>
                     <div class="loginBtn">
-                        <div class="btn disabled" data-smsloginreg="loginBtn">登录 </div>
+                        <div class="btn disabled" data-smsloginreg="loginBtn">登录</div>
                     </div>
                 </div>
+                <!-- 短信登录 -->
                 <div class="dn" data-login-sdk="smsLogin">
                     <div class="loginTab">
                         <a href="javascript:;" data-smslogin="baseLogin">密码登录</a>
@@ -44,14 +50,40 @@
                             <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入手机号" maxlength="11"></div>
                         </div>
                         <div class="loginInfoItem">
-                            <div class="loginAccount"><input class="inputBox" type="password" placeholder="请输入验证码" maxlength="11"></div>
+                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入验证码" maxlength="11"></div>
+                            <div class="verificationCode">获取验证码</div>
                         </div>
                     </div>
                     <div class="loginBtn">
-                        <div class="btn disabled" data-smsloginreg="loginBtn">登录 </div>
+                        <div class="btn disabled" data-smsloginreg="loginBtn">登录</div>
                     </div>
                 </div>
+                <!-- 二维码登录 -->
                 <div class="dn" data-login-sdk="wechatLogin">wechatLogin</div>
+                <!-- 注册 -->
+                <div class="dn" data-login-sdk="register">
+                    <div class="loginTab">
+                        <a href="javascript:;" data-register="back">注册</a>
+                    </div>
+                    <div class="loginInfo">
+                        <div class="loginInfoItem">
+                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入手机号" maxlength="11"></div>
+                        </div>
+                        <div class="loginInfoItem">
+                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入验证码" maxlength="11"></div>
+                            <div class="verificationCode">获取验证码</div>
+                        </div>
+                    </div>
+                    <div class="loginBtn">
+                        <div class="btn disabled">激活</div>
+                    </div>
+                </div>
+                <!-- 忘记密码 -->
+                <div class="dn" data-login-sdk="changePwd">
+                    <div class="loginTab">
+                        <a href="javascript:;" data-register="back">修改密码</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -83,14 +115,27 @@
                     that.find('[data-baselogin="nameErr"]').removeClass('dn')
                 }
             })
-            // alert($('.loginForm').attr('data-login-sdk'))
-            // var loginSdk = $('.loginForm')[0].children
-            //     // for (let i = 0; i < loginSdk.length; i++) {
-            //     //     loginSdk[i].dataset.loginSdk
-            //     //     console.log()
-            //     // }
-            // let a = $('.loginForm').find('div[data-login-sdk="baseLogin"]').html('')
-            // console.log(a)
+
+        that.find('[data-baselogin="reg"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="register"]').removeClass('dn').siblings().addClass('dn')
+            });
+        that.find('[data-baselogin="forgotPwd"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="changePwd"]').removeClass('dn').siblings().addClass('dn')
+            });
+        that.find('[data-register="back"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+            });
+        // alert($('.loginForm').attr('data-login-sdk'))
+        // var loginSdk = $('.loginForm')[0].children
+        //     // for (let i = 0; i < loginSdk.length; i++) {
+        //     //     loginSdk[i].dataset.loginSdk
+        //     //     console.log()
+        //     // }
+        // let a = $('.loginForm').find('div[data-login-sdk="baseLogin"]').html('')
+        // console.log(a)
     })
 </script>
 

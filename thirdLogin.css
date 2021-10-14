@@ -52,7 +52,7 @@ a:active {
 /* loginInfo */
 
 .loginInfo {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .loginInfo .loginInfoItem {
@@ -62,6 +62,7 @@ a:active {
     font-size: 0;
     white-space: nowrap;
     display: flex;
+    position: relative;
 }
 
 .loginInfo .loginInfoItem .infoError {
@@ -79,6 +80,27 @@ a:active {
     font-size: 14px;
     color: #000;
     background: transparent;
+}
+
+.verificationCode {
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    cursor: pointer;
+}
+
+.loginInfo .loginInfoOthers {
+    font-size: 12px;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.loginInfo .loginInfoOthers .register,
+.loginInfo .loginInfoOthers .forgotPwd {
+    cursor: pointer;
 }
 
 
