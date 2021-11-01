@@ -18,6 +18,7 @@
             <div class="loginFormInner">
                 <!-- 密码登录 -->
                 <div class="" data-login-sdk="baseLogin">
+                    <div class="imgContent" data-baselogin="wechatLogin"><img src="wxLogin.png"></div>
                     <div class="loginTab">
                         <a href="javascript:;" class="selected">密码登录</a>
                         <a href="javascript:;" data-baselogin="smsLogin">短信登录</a>
@@ -36,18 +37,19 @@
                         </div>
                     </div>
                     <div class="loginBtn">
-                        <div class="btn disabled" data-smsloginreg="loginBtn">登录</div>
+                        <div class="btn" data-smsloginreg="loginBtn">登录</div>
                     </div>
                 </div>
                 <!-- 短信登录 -->
                 <div class="dn" data-login-sdk="smsLogin">
+                    <div class="imgContent" data-smslogin="wechatLogin"><img src="wxLogin.png"></div>
                     <div class="loginTab">
                         <a href="javascript:;" data-smslogin="baseLogin">密码登录</a>
                         <a href="javascript:;" class="selected">短信登录</a>
                     </div>
                     <div class="loginInfo">
                         <div class="loginInfoItem">
-                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入手机号" maxlength="11"></div>
+                            <div class="loginAccount"><input data-smslogin="nameInput" class="inputBox" type="text" placeholder="请输入手机号" maxlength="11"></div>
                         </div>
                         <div class="loginInfoItem">
                             <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入验证码" maxlength="11"></div>
@@ -55,15 +57,18 @@
                         </div>
                     </div>
                     <div class="loginBtn">
-                        <div class="btn disabled" data-smsloginreg="loginBtn">登录</div>
+                        <div class="btn" data-smsloginreg="loginBtn">登录</div>
                     </div>
                 </div>
                 <!-- 二维码登录 -->
-                <div class="dn" data-login-sdk="wechatLogin">wechatLogin</div>
+                <div class="dn" data-login-sdk="wechatLogin">
+                    <div class="imgContent" data-wechatlogin="baseLogin"><img src="baseLogin.png"></div>
+                </div>
                 <!-- 注册 -->
                 <div class="dn" data-login-sdk="register">
-                    <div class="loginTab">
-                        <a href="javascript:;" data-register="back">注册</a>
+                    <div class="loginTitle">
+                        <div><i data-register="back">返回</i></div>
+                        <div><span>激活账号</span></div>
                     </div>
                     <div class="loginInfo">
                         <div class="loginInfoItem">
@@ -75,13 +80,29 @@
                         </div>
                     </div>
                     <div class="loginBtn">
-                        <div class="btn disabled">激活</div>
+                        <div class="btn">激活</div>
                     </div>
                 </div>
                 <!-- 忘记密码 -->
                 <div class="dn" data-login-sdk="changePwd">
-                    <div class="loginTab">
-                        <a href="javascript:;" data-register="back">修改密码</a>
+                    <div class="loginTitle">
+                        <div><i data-changePwd="back">返回</i></div>
+                        <div><span>修改密码</span></div>
+                    </div>
+                    <div class="loginInfo">
+                        <div class="loginInfoItem">
+                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入手机号" maxlength="11"></div>
+                        </div>
+                        <div class="loginInfoItem">
+                            <div class="loginAccount"><input class="inputBox" type="text" placeholder="请输入验证码" maxlength="11"></div>
+                            <div class="verificationCode">获取验证码</div>
+                        </div>
+                        <div class="loginInfoItem">
+                            <div class="loginAccount"><input data-changepwd="pwdInput" class="inputBox" type="password" placeholder="请输入新的密码" maxlength="11"></div>
+                        </div>
+                    </div>
+                    <div class="loginBtn">
+                        <div class="btn">确认修改</div>
                     </div>
                 </div>
             </div>
@@ -91,8 +112,11 @@
 </body>
 <script>
     function login() {
-        $('#loginForm').thirdLogin()
-            // alert('login')
+        $('#loginForm').thirdLogin({
+            sendMsg: function() {
+                console.log(1)
+            }
+        })
     }
     $(function() {
         var that = $('.loginContainer')
@@ -128,6 +152,22 @@
             .on("click", function() {
                 that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
             });
+        that.find('[data-changePwd="back"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+            });
+        that.find('[data-baselogin="wechatLogin"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
+            });
+        that.find('[data-smslogin="wechatLogin"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
+            });
+        that.find('[data-wechatlogin="baseLogin"]')
+            .on("click", function() {
+                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+            });
         // alert($('.loginForm').attr('data-login-sdk'))
         // var loginSdk = $('.loginForm')[0].children
         //     // for (let i = 0; i < loginSdk.length; i++) {
@@ -136,6 +176,11 @@
         //     // }
         // let a = $('.loginForm').find('div[data-login-sdk="baseLogin"]').html('')
         // console.log(a)
+
+        that.find('[data-smsloginreg="loginBtn"]')
+            .on("click", function() {
+                console.log($.getInputValue())
+            });
     })
 </script>
 

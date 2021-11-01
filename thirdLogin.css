@@ -1,3 +1,8 @@
+html {
+    --themeColor: red;
+    --loginBtnColor: blue;
+}
+
 .loginContainer {
     position: relative;
     display: inline-block;
@@ -12,8 +17,26 @@
     border: 1px solid #000;
 }
 
+.loginHeader {
+    margin: 10px auto;
+}
+
 .loginFormInner {
     padding: 0 28px;
+    position: relative;
+}
+
+.imgContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 50px;
+}
+
+.imgContent img {
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -34,11 +57,11 @@
 }
 
 .loginTab a.selected {
-    color: red;
+    color: var(--themeColor);
 }
 
 .loginTab a:hover {
-    color: red;
+    color: var(--themeColor);
 }
 
 a:link,
@@ -46,6 +69,20 @@ a:visited,
 a:hover,
 a:active {
     text-decoration: none;
+}
+
+
+/* loginTitle */
+
+.loginTitle {}
+
+.loginTitle i {
+    font-style: normal;
+    cursor: pointer;
+    position: absolute;
+    left: 10px;
+    top: 1px;
+    font-size: 14px;
 }
 
 
@@ -69,7 +106,7 @@ a:active {
     font-size: 12px;
     position: absolute;
     bottom: 33px;
-    color: red;
+    color: var(--themeColor);
 }
 
 .loginInfo .loginInfoItem .inputBox {
@@ -111,6 +148,7 @@ a:active {
     width: 100%;
     height: 100%;
     color: #fff;
+    background: var(--loginBtnColor);
     font-size: 14px;
     line-height: 40px;
     cursor: pointer;
@@ -124,6 +162,7 @@ a:active {
 .loginForm div[data-login-sdk] {
     height: 100px;
     margin-bottom: 10px;
+    position: relative;
 }
 
 .dn {
