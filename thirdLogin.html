@@ -12,7 +12,7 @@
     <button id="btn" onclick="login()" style="width: 100px;height: 30px;"></button>
     <div id="loginForm">
     </div>
-    <div class="loginContainer">
+    <div class="loginContainer dn">
         <div class="loginHeader">登录 </div>
         <div class="loginForm">
             <div class="loginFormInner">
@@ -114,60 +114,78 @@
     function login() {
         $('#loginForm').thirdLogin({
             sendMsg: function() {
-                console.log(1)
+                var user = $.getNameInputValue()
+                console.log(user)
+            },
+            register: function() {
+                var user = $.getNameInputValue(),
+                    code = $.getCodeInputValue()
+                console.log(user, code)
+            },
+            login: function() {
+                var user = $.getNameInputValue(),
+                    code = $.getCodeInputValue(),
+                    pwd = $.getPwdInputValue()
+                console.log(user, code, pwd)
+            },
+            changePwd: function() {
+                var user = $.getNameInputValue(),
+                    code = $.getCodeInputValue(),
+                    pwd = $.getPwdInputValue()
+                console.log(user, code, pwd)
             }
         })
     }
     $(function() {
         var that = $('.loginContainer')
-        that.find('[data-baselogin="smsLogin"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="smsLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-smslogin="baseLogin"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
+            // that.find('[data-baselogin="smsLogin"]')
+            //     .on("click", function() {
+            //         that.find('div[data-login-sdk="smsLogin"]').removeClass('dn').siblings().addClass('dn')
+            //     });
+            // that.find('[data-smslogin="baseLogin"]')
+            //     .on("click", function() {
+            //         that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+            //     });
 
-        that.find('[data-baselogin="nameInput"]')
-            .focus(function() {
-                that.find('[data-baselogin="nameErr"]').addClass('dn')
-            })
-            .blur(function() {
-                let account = that.find('[data-baselogin="nameInput"]').val()
-                if (account.length != 11) {
-                    that.find('[data-baselogin="nameErr"]').removeClass('dn')
-                }
-            })
+        // that.find('[data-baselogin="nameInput"]')
+        //     .focus(function() {
+        //         that.find('[data-baselogin="nameErr"]').addClass('dn')
+        //     })
+        //     .blur(function() {
+        //         let account = that.find('[data-baselogin="nameInput"]').val()
+        //         if (account.length != 11) {
+        //             that.find('[data-baselogin="nameErr"]').removeClass('dn')
+        //         }
+        //     })
 
-        that.find('[data-baselogin="reg"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="register"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-baselogin="forgotPwd"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="changePwd"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-register="back"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-changePwd="back"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-baselogin="wechatLogin"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-smslogin="wechatLogin"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
-        that.find('[data-wechatlogin="baseLogin"]')
-            .on("click", function() {
-                that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
-            });
+        // that.find('[data-baselogin="reg"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="register"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-baselogin="forgotPwd"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="changePwd"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-register="back"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-changePwd="back"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-baselogin="wechatLogin"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-smslogin="wechatLogin"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="wechatLogin"]').removeClass('dn').siblings().addClass('dn')
+        //     });
+        // that.find('[data-wechatlogin="baseLogin"]')
+        //     .on("click", function() {
+        //         that.find('div[data-login-sdk="baseLogin"]').removeClass('dn').siblings().addClass('dn')
+        //     });
         // alert($('.loginForm').attr('data-login-sdk'))
         // var loginSdk = $('.loginForm')[0].children
         //     // for (let i = 0; i < loginSdk.length; i++) {
