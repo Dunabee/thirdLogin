@@ -20,9 +20,11 @@
 
     $.fn.thirdLogin = function(options) {
         var defaults = {
-            sendMsg: function() {},
+            onload: function() {},
+            sendMsg: function(argu) {},
             register: function() {},
-            login: function() {},
+            loginByPhone: function() {},
+            loginByPwd: function() {},
             changePwd: function() {},
         };
         var settings = $.extend(defaults, options);
@@ -45,6 +47,10 @@
                         </div>\
                         <div class="loginInfoItem">\
                             <div class="loginAccount"><input data-baselogin="pwdInput" class="inputBox" type="password" placeholder="请输入密码" maxlength="11"></div>\
+                        </div>\
+                        <div class="loginInfoItem">\
+                            <div class="loginAccount"><input data-baselogin="codeInput" class="inputBox" type="text" placeholder="验证码"></div>\
+                            <div class="imgCode" data-baselogin="getCode"><img id="imgSignCode" src=""></div>\
                         </div>\
                         <div class="loginInfoOthers">\
                             <div class="register"><a data-baselogin="reg">激活账号</a></div>\
@@ -79,6 +85,12 @@
                 <!-- 二维码登录 -->\
                 <div class="dn" data-login-sdk="wechatLogin">\
                     <div class="imgContent" data-wechatlogin="baseLogin"><img src="baseLogin.png"></div>\
+                    <div class="loginTitle">\
+                        <div><span>微信扫码登录</span></div>\
+                    </div>\
+                    <div class="loginInfo">\
+                        <div class="wxQRCode"><img id="imgWxCode" src=""/></div>\
+                    </div>\
                 </div>\
                 <!-- 注册 -->\
                 <div class="dn" data-login-sdk="register">\
@@ -127,6 +139,7 @@
         </div>\
     </div>';
         this.html(html);
+        settings.onload();
 
         let that = this;
         init(that);
@@ -181,8 +194,9 @@
 
         // 发送验证码
         this.find('[data-smslogin="getCode"],[data-register="getCode"],[data-changepwd="getCode"]')
-            .on("click", function() {
-                settings.sendMsg()
+            .one("click", function() {
+                var argu = arguments.callee;
+                settings.sendMsg.call(this, argu)
             });
         // 注册
         this.find('[data-register="registerBtn"]')
@@ -190,14 +204,23 @@
                 settings.register()
             });
         // 登录
-        this.find('[data-baselogin="loginBtn"],[data-smslogin="loginBtn"]')
+        this.find('[data-smslogin="loginBtn"]')
             .on("click", function() {
-                settings.login()
+                settings.loginByPhone()
+            });
+        this.find('[data-baselogin="loginBtn"]')
+            .on("click", function() {
+                settings.loginByPwd()
             });
         // 修改密码
         this.find('[data-changepwd="changeBtn"]')
             .on("click", function() {
                 settings.changePwd()
+            });
+
+        this.find('#imgSignCode,#imgWxCode')
+            .on("click", function() {
+                settings.onload()
             });
 
         return this;
